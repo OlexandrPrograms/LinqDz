@@ -6,16 +6,71 @@
         {
             List<Firm> firms = new List<Firm>
             {
-                new Firm("Global Food Marketing", new DateOnly(2020, 3, 15), Profile.Marketing, "John White", 250, "London, UK"),
-                new Firm("Fast Food Express", new DateOnly(2022, 11, 10), Profile.Food, "Alice Smith", 150, "London, UK"),
-                new Firm("Tech Solutions", new DateOnly(2018, 5, 20), Profile.IT, "Robert Johnson", 450, "Kyiv, Ukraine"),
-                new Firm("White Star Logistics", new DateOnly(2021, 8, 12), Profile.Finance, "David Black", 80, "London, UK"),
-                new Firm("Fresh Food Lab", new DateOnly(2026, 6, 7), Profile.Food, "Emma Watson", 45, "Lviv, Ukraine"),
-                new Firm("Cyber Shield", new DateOnly(2025, 1, 15), Profile.IT, "Michael Brown", 90, "Kyiv, Ukraine"),
-                new Firm("Creative Agency", new DateOnly(2019, 9, 30), Profile.Marketing, "Sarah White", 60, "Manchester, UK"),
-                new Firm("Capital Finance", new DateOnly(2015, 4, 18), Profile.Finance, "James Green", 600, "London, UK"),
-                new Firm("EduSmart Academy", new DateOnly(2023, 2, 1), Profile.Education, "Elena Taylor", 120, "Odesa, Ukraine"),
-                new Firm("Soft Food Digital", new DateOnly(2025, 11, 5), Profile.IT, "Oleh Black", 30, "Kharkiv, Ukraine")
+                new Firm(
+                    "TechCorp",
+                    new DateOnly(2018, 5, 20),
+                    Profile.IT,
+                    "Lionel Messi",
+                    new Employee[]
+                    {
+                        new Employee("Lionel Messi", Position.CEO, "234-567-890", "direct.messi@techcorp.com", 15000),
+                        new Employee("Diana Prince", Position.Manager, "239-111-222", "diana.p@techcorp.com", 4500),
+                        new Employee("Alex Turner", Position.Worker, "098-333-444", "alex.t@techcorp.com", 2200)
+                    },
+                    "Kyiv, Ukraine"
+                ),
+
+                new Firm(
+                    "Global Food",
+                    new DateOnly(2020, 3, 15),
+                    Profile.Food,
+                    "John White",
+                    new Employee[]
+                    {
+                        new Employee("Dmitry Ivanov", Position.Manager, "231-999-888", "dimon@food.com", 3800),
+                        new Employee("Sarah Connor", Position.Worker, "050-444-555", "sarah.c@food.com", 1800)
+                    },
+                    "London, UK"
+                ),
+
+                new Firm(
+                    "Marketing Pro",
+                    new DateOnly(2019, 9, 30),
+                    Profile.Marketing,
+                    "Sarah White",
+                    new Employee[]
+                    {
+                        new Employee("Diego Maradona", Position.Manager, "067-123-456", "diego@mpro.com", 5000),
+                        new Employee("Lionel Richie", Position.Employer, "230-000-111", "lionel.r@mpro.com", 6200)
+                    },
+                    "Manchester, UK"
+                ),
+
+                new Firm(
+                    "FinFinance",
+                    new DateOnly(2015, 4, 18),
+                    Profile.Finance,
+                    "James Green",
+                    new Employee[]
+                    {
+                        new Employee("Diana Ross", Position.Worker, "235-777-666", "diana.ross@fin.com", 2900),
+                        new Employee("Bruce Wayne", Position.Manager, "093-888-999", "bruce.w@fin.com", 7000)
+                    },
+                    "London, UK"
+                ),
+
+                new Firm(
+                    "EduSmart",
+                    new DateOnly(2023, 2, 1),
+                    Profile.Education,
+                    "Elena Taylor",
+                    new Employee[]
+                    {
+                        new Employee("Lionel Scaloni", Position.Worker, "063-222-333", "direct.scaloni@edusmart.com", 2100),
+                        new Employee("Dirk Nowitzki", Position.Worker, "238-444-111", "dirk@edusmart.com", 3100)
+                    },
+                    "Odesa, Ukraine"
+                )
             };
 
 
@@ -117,10 +172,43 @@
 
             //var firms11 = firms.Where(f => f.CEO.Contains("Black", StringComparison.OrdinalIgnoreCase) && f.Name.Contains("White", StringComparison.OrdinalIgnoreCase));
             //Print(firms11);
+
+
+
+
+            // ======== TASK 3 ========
+            Console.Write("Введіть назву фірми: ");
+            string name = Console.ReadLine() ?? "";
+            var e1 = firms.FirstOrDefault(f => f.Name == name)?.Employees;
+            Print(e1);
+
+            Console.Write("Введіть назву фірми: ");
+            string name2 = Console.ReadLine() ?? "";
+            Console.Write("Введіть мінімальну зарплату: ");
+            int minSalary = int.TryParse(Console.ReadLine() ?? "0", out int salary) ? salary : 0;
+            var e2 = firms.FirstOrDefault(f => f.Name == name2)?.Employees.Where(e => e.Salary > minSalary);
+            Print(e2);
+
+            var e3 = firms.SelectMany(f => f.Employees).Where(e => e.Position == Position.Manager);
+            Print(e3);
+
+            var e4 = firms.SelectMany(f => f.Employees).Where(e => e.Phone.StartsWith("23"));
+            Print(e4);
+
+            var e5 = firms.SelectMany(f => f.Employees).Where(e => e.Email.StartsWith("di"));
+            Print(e5);
+
+            var e6 = firms.SelectMany(f => f.Employees).Where(e => e.Pib.StartsWith("Lionel"));
+            Print(e6);
         }
 
-        static void Print(IEnumerable<Firm> firms)
+        static void Print(IEnumerable<Employee>? firms)
         {
+            if (firms == null)
+            {
+                Console.WriteLine("Не знайдено!");
+                return;
+            }
             foreach (var firm in firms)
                 Console.WriteLine(firm);
             Console.WriteLine("=========================================");
