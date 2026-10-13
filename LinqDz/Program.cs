@@ -176,30 +176,53 @@
 
 
 
-            // ======== TASK 3 ========
-            Console.Write("Введіть назву фірми: ");
-            string name = Console.ReadLine() ?? "";
-            var e1 = firms.FirstOrDefault(f => f.Name == name)?.Employees;
-            Print(e1);
+            //// ======== TASK 3 ========
+            //Console.Write("Введіть назву фірми: ");
+            //string name = Console.ReadLine() ?? "";
+            //var e1 = firms.FirstOrDefault(f => f.Name == name)?.Employees;
+            //Print(e1);
 
-            Console.Write("Введіть назву фірми: ");
-            string name2 = Console.ReadLine() ?? "";
-            Console.Write("Введіть мінімальну зарплату: ");
-            int minSalary = int.TryParse(Console.ReadLine() ?? "0", out int salary) ? salary : 0;
-            var e2 = firms.FirstOrDefault(f => f.Name == name2)?.Employees.Where(e => e.Salary > minSalary);
-            Print(e2);
+            //Console.Write("Введіть назву фірми: ");
+            //string name2 = Console.ReadLine() ?? "";
+            //Console.Write("Введіть мінімальну зарплату: ");
+            //int minSalary = int.TryParse(Console.ReadLine() ?? "0", out int salary) ? salary : 0;
+            //var e2 = firms.FirstOrDefault(f => f.Name == name2)?.Employees.Where(e => e.Salary > minSalary);
+            //Print(e2);
 
-            var e3 = firms.SelectMany(f => f.Employees).Where(e => e.Position == Position.Manager);
-            Print(e3);
+            //var e3 = firms.SelectMany(f => f.Employees).Where(e => e.Position == Position.Manager);
+            //Print(e3);
 
-            var e4 = firms.SelectMany(f => f.Employees).Where(e => e.Phone.StartsWith("23"));
-            Print(e4);
+            //var e4 = firms.SelectMany(f => f.Employees).Where(e => e.Phone.StartsWith("23"));
+            //Print(e4);
 
-            var e5 = firms.SelectMany(f => f.Employees).Where(e => e.Email.StartsWith("di"));
-            Print(e5);
+            //var e5 = firms.SelectMany(f => f.Employees).Where(e => e.Email.StartsWith("di"));
+            //Print(e5);
 
-            var e6 = firms.SelectMany(f => f.Employees).Where(e => e.Pib.StartsWith("Lionel"));
-            Print(e6);
+            //var e6 = firms.SelectMany(f => f.Employees).Where(e => e.Pib.StartsWith("Lionel"));
+            //Print(e6);
+
+
+
+
+            //// ======== TASK 4 ========
+            //Console.WriteLine("Введіть масив цілих чисел через кому:");
+            //List<int> nums = Console.ReadLine().Split(",").Select(x => int.Parse(x.Trim())).ToList();
+
+            //Console.Write(
+            //    "Сортувати за\n" +
+            //    "1. Зростанням\n" +
+            //    "2. Спаданням\n" +
+            //    "> ");
+            //string choice = Console.ReadLine() ?? "1";
+
+            //IEnumerable<int> res;
+            //if (choice == "2")
+            //    res = nums.OrderByDescending(n => Math.Abs(n).ToString().Sum(c => c - '0'));
+            //else
+            //    res = nums.OrderBy(n => Math.Abs(n).ToString().Sum(c => c - '0'));
+
+            //foreach (int num in res)
+            //    Console.Write(num + ", ");
         }
 
         static void Print(IEnumerable<Employee>? firms)
